@@ -2,8 +2,8 @@
 title: "Roger Dsouza"
 date: 2018-11-19T10:47:58+10:00
 draft: false
-image: "images/team/nonsap-visuals-kMJp7620W6U-unsplash.jpg"
-jobtitle: "Graphic Designer"
+image: "images/team/vince-fleming-613817-unsplash.jpg"
+jobtitle: "Director"
 linkedinurl: ""
 weight: 7
 layout: team

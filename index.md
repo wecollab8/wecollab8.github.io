@@ -8,7 +8,7 @@ intro_image_hide_on_mobile: true
 show_call_box: true
 ---
 
-# WeCollab8 Technologies
+# What we do
 ### Collaborate | Innovate | Evolve.
 
-Providing collaborative &  innovative technology solutions and services that solve enterprise business problems.
+We design and implement collaborative &  innovative technology solutions and services that solve enterprise business problems.
