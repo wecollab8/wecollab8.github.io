@@ -5,48 +5,59 @@ description: About
 bodyClass: page-about
 ---
 
-Lorem markdownum aequalis strigis. _Saetigeri iubeas_, vultu huic alvum nondum
-de obside ut laniavit arbor palmis, cum quin. Rupes vetat videndo, armigerae
-crimen habet Priamum nec.
+WeCollab8 Technology Holdings is Technology Services Company with the goal of simplifying Enterprise IT
+through collaboration and innovation. 
 
-## Ne verba patulosque numen vix libet
+## Services
 
-Agitabitur signa lympha; non lacunae, mox cum tumulis quoque triste dictis.
-Ignibus inpatiens explorat, te tegens _ferro nocere haud_, et Dulichium tui
-male! Quo sed [fuit flexit et](#vexant-achivi) hic die solido, gloria?
+### A. Integration Services
 
-1. Cum det dixit Parcarum qui spemque est
-2. Exit ex huic
-3. Quod consiste agitataque claustraque vicina videt lacertis
-4. Loquor videt
-5. Ardua non igne caelesti coniugis cognovi diversorum
-6. Per nunc pariterque saeva vindicet
+We architect and implement integrations between software applications and platforms using Open Standards such as SOAP and REST.
 
-Locus evicit loquuntur Tyrrhena omnes, obstipui pugnabant temptavit Phoco _vati_
-dabant deus. Memorata haberet sepulcrales gentisque dum sic, in flumina templa!
-Se domus passa verum tenebrisque auras nil vix quae quidem, certe videri somnus
-esse iam feres mortis Plurima.
+Our team has extensive experience in Java and .Net based integration frameworks and use open standards and technologies to solve complex integration problems. We provide services for deployment of integration infrastructure on-prem, in the cloud and cloud native. 
 
-## Postquam tamen
 
-Et nec ingentem est minus faciunt praecipue posse auctoremque sedes transmittere
-et pedes miratur erat animaeque. Tellus admonuit humanam funes, sagittis et
-licet! Inserui quamvis Clymeni.
+1. Requirement Assessment and Integration Architecture Design
 
-- Parens est studiisque interea
-- Pro istis mediis carnes iste nec imperat
-- Te vocas orat nisi quantumque castra
-- Gestumque crepuscula esse videntur coegit
-- Ambo videtque gerat aquae ferens vagina
-- Adde leviter faciam tetigisse regunt concava in
+2. Integration Infrastructure Deployment - We deploy infrastructure on-prem and in the cloud. 
 
-Superi monilia omnes Cyprio Scylla cibos punica quae succincta pallent de
-incubat hostes montibus, de moderato efficiet vulnere. Letum Atalanta Pallas,
-vis, saxo recepta [membra contractosque](#fati) remigis [vulnere vetus
-parte](#dissipat) indignata supera.
+3. API First Design using Industry best practices
 
-Quantum auxilium datus; sed pineta et, iuvenes redito; credas mensae, meum. Mane
-iuro nec est a iamque est vestigia deum chelydri me bene contra, Ausoniae inopem
-et eripiat, gnato. Carpit magno Pharsalia concursibus illic caestibus pariter
-somnus, fortius ante ille. Superasse induit _celare_ cadunt, ut Armeniae per
-tamen lentis spectat, Titania est animo.
+4. API Security Design and implementation using API Gateways
+
+5. DevOps Automation 
+
+6. Enterprise Automation
+
+Our engineers are certified AWS and Kubernetes experts with experience in deploying cloud and cloud native applications and have experience working on Agile teams. 
+
+### B. Infrastructure Management and Monitoring
+
+
+### C. Security Solutions and Services
+
+We have decades of consulting experience on IT Security services for large financial, telco and retail companies. 
+
+We provide the following foundational and advanced implementation of Enterprise IT Security Services:
+
+1. Design and Implementation of Identity and Access Management Solution
+
+2. Web Single Sign-On
+
+3. API Management and Developer Portal
+
+4. Privileged Access Management
+
+
+### D. Cloud and Cloud Native 
+
+Our consultants have experience in implementing Cloud and Cloud native solutions.
+
+1. Design and Implementation on AWS Cloud Platform
+
+2. Design and Implementation of Cloud Native Platforms - Kubernetes
+
+3. 
+
+
+
