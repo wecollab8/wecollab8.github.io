@@ -1,11 +1,11 @@
 ---
-title: "Broadcom Solutions"
+title: "Broadcom Software Solutions"
 date: 2018-11-18T12:33:46+10:00
 featured: true
 weight: 1
 layout: service
 ---
-Our professionals have experience in delivering on a plethora of Broadcom solutions in the ITSM, Enteprise Automation and Security solutions 
+Our professionals have experience in delivering on a plethora of Broadcom Software solutions in the ITSM, Enteprise Automation and Security solutions 
 
 # Enterprise Automation
 

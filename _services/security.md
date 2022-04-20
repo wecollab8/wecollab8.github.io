@@ -9,6 +9,15 @@ layout: service
 Our consultants work with clients to understand their security needs & deliver security solutions
 that improve their security posture and manage their threat landscape. 
 
+## Open Standards Security
+
+We adopt open industry standards for security and SSO to simplify integration and management.
+
+* JWT - JSON Web Token
+* OAuth 2.0 for web authentication and authorization
+* SAML Standards
+
+
 ## CA Layer7 Management Suite
 
 We work with organizations to secure and govern their API and Web assets with
