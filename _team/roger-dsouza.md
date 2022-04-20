@@ -1,14 +1,17 @@
 ---
-title: "Roger Dsouza"
+title: "Roger D'Souza"
 date: 2018-11-19T10:47:58+10:00
 draft: false
-image: "images/team/vince-fleming-613817-unsplash.jpg"
+image: "images/team/roger_photo.png"
 jobtitle: "Director"
 linkedinurl: ""
 weight: 7
 layout: team
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Roger has spent nearly two decades in the IT Industry. He started his career working on CA Technologies monitoring tools like NSM, Spectrum and
+eHealth and automation tools such as AutoSys. For there on, he has worked on everything from Infrastructure Management and IT Service Management.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Roger often seeks to find efficiency in everything. Roger mantra is "Automate Everything". If something can be automated, you can be assured it will be. 
+
+Roger is active member of the various cloud and cloud native communities in South Africa and is a speaker at various meetups. He was nominated as an AWS Community Builder in the Southern Africa region.
