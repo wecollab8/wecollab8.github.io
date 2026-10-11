@@ -12,6 +12,12 @@ export default defineConfig({
     starlight({
       title: 'WeCollab8 Guides',
       description: 'Practical guides for AI readiness and dependable data foundations.',
+      head: [
+        {
+          tag: 'meta',
+          attrs: { name: 'robots', content: 'noindex, nofollow' },
+        },
+      ],
       disable404Route: true,
       components: {
         Footer: './src/components/ConsentStarlightFooter.astro',
@@ -30,7 +36,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const pathname = new URL(page).pathname;
-        return pathname !== '/search/' && pathname !== '/cookie-preferences/' && pathname !== '/404/' && pathname !== '/404';
+        return !pathname.startsWith('/docs/') && pathname !== '/search/' && pathname !== '/cookie-preferences/' && pathname !== '/contact/thanks/' && pathname !== '/404/' && pathname !== '/404';
       },
     }),
     astroConsent({

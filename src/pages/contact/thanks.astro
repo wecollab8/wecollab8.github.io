@@ -1,0 +1,50 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Enquiry received | WeCollab8"
+  description="Your enquiry has been sent to WeCollab8."
+  pagefindIgnore
+  noindex
+>
+  <section class="bg-forest text-paper">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:py-24 lg:px-10 lg:py-28">
+      <div class="max-w-3xl">
+        <p class="inline-flex items-center gap-3 text-xs font-bold uppercase text-paper/70">
+          <span class="size-2 bg-rust" aria-hidden="true"></span>
+          Enquiry received <span class="text-paper/40" aria-hidden="true">/ 01</span>
+        </p>
+        <h1 class="mt-7 max-w-[12ch] font-display text-5xl leading-tight md:text-7xl">Thanks for getting in touch.</h1>
+        <p class="mt-6 max-w-xl text-base leading-8 text-paper/75">Your enquiry is with the WeCollab8 team. We’ll review what you shared and reply to the work email you provided.</p>
+      </div>
+
+      <div class="self-center border-t border-paper/20 pt-7 md:border-l md:border-t-0 md:py-2 md:pl-8">
+        <p class="text-xs font-bold uppercase text-paper/65">What happens next</p>
+        <ol class="mt-5">
+          <li class="grid grid-cols-[3rem_1fr] gap-3 border-t border-paper/20 py-4 text-sm leading-6">
+            <span class="font-display text-2xl text-rust">01</span>
+            <span class="text-paper/85">We read the context and identify the right people to follow up.</span>
+          </li>
+          <li class="grid grid-cols-[3rem_1fr] gap-3 border-t border-paper/20 py-4 text-sm leading-6">
+            <span class="font-display text-2xl text-rust">02</span>
+            <span class="text-paper/85">We continue the conversation by email.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-7xl gap-6 border-t border-line px-5 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8 md:py-12 lg:px-10">
+    <div>
+      <p class="eyebrow">While you’re here</p>
+      <h2 class="mt-2 font-display text-3xl text-ink">Continue exploring</h2>
+    </div>
+    <nav class="flex flex-wrap items-center gap-x-6 gap-y-4" aria-label="Next steps">
+      <a class="inline-flex min-h-12 items-center gap-3 bg-forest px-6 py-3 text-sm font-semibold text-white no-underline transition-colors hover:bg-rust focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-forest" href="/services/">
+        Explore services <span aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="text-link text-sm font-semibold text-forest" href="/contact/">Send another enquiry</a>
+    </nav>
+  </section>
+</SiteLayout>
