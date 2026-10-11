@@ -46,6 +46,11 @@ test('contact page links to the agreed email address', () => {
   assert.match(html, /mailto:hello@wecollab8\.co\.za/);
 });
 
+test('Roger profile contact link opens the contact form', () => {
+  const html = readFileSync(join(outputDirectory, 'team/roger-dsouza/index.html'), 'utf8');
+  assert.match(html, /<a href="\/contact\/"[^>]*>Contact WeCollab8/);
+});
+
 test('documentation remains directly accessible but is hidden from public discovery', () => {
   const documentationPages = [
     'docs/index.html',
