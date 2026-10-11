@@ -50,4 +50,4 @@ Great Expectations works best as one part of a broader data-quality practice tha
 
 - [Great Expectations: GX Core overview](https://docs.greatexpectations.io/docs/core/introduction/gx_overview)
 - [Try a GX Core workflow](https://docs.greatexpectations.io/docs/core/introduction/try_gx)
-- [Building dependable data foundations](/docs/data-foundations/)
+- [Explore data engineering services](/services/data-engineering/)

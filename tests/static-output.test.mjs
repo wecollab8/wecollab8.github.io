@@ -26,6 +26,7 @@ const requiredPages = [
   'team/index.html',
   'team/roger-dsouza/index.html',
   'contact/index.html',
+  'contact/thanks/index.html',
   '404.html',
 ];
 
@@ -42,7 +43,112 @@ test('Astro export preserves the GitHub Pages custom domain', () => {
 
 test('contact page links to the agreed email address', () => {
   const html = readFileSync(join(outputDirectory, 'contact/index.html'), 'utf8');
-  assert.match(html, /mailto:admin@wecollab8\.co\.za/);
+  assert.match(html, /mailto:hello@wecollab8\.co\.za/);
+});
+
+test('Roger profile contact link opens the contact form', () => {
+  const html = readFileSync(join(outputDirectory, 'team/roger-dsouza/index.html'), 'utf8');
+  assert.match(html, /<a href="\/contact\/"[^>]*>Contact WeCollab8/);
+});
+
+test('documentation remains directly accessible but is hidden from public discovery', () => {
+  const documentationPages = [
+    'docs/index.html',
+    'docs/ai-readiness/index.html',
+    'docs/data-foundations/index.html',
+  ];
+
+  for (const page of documentationPages) {
+    const html = readFileSync(join(outputDirectory, page), 'utf8');
+    assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+    assert.doesNotMatch(html, /data-pagefind-body/);
+  }
+
+  const homepage = readFileSync(join(outputDirectory, 'index.html'), 'utf8');
+  const article = readFileSync(join(outputDirectory, 'blog/great-expectations-data-quality/index.html'), 'utf8');
+  assert.doesNotMatch(homepage, /href="\/docs\//);
+  assert.doesNotMatch(article, /href="\/docs\//);
+});
+
+test('contact page exports the required and optional Web3Forms fields', () => {
+  const html = readFileSync(join(outputDirectory, 'contact/index.html'), 'utf8');
+  assert.match(html, /<form[^>]+action="https:\/\/api\.web3forms\.com\/submit"[^>]+method="POST"/);
+  assert.match(html, /name="access_key"/);
+  assert.match(html, /name="redirect"[^>]+value="https:\/\/www\.wecollab8\.co\.za\/contact\/thanks\/"/);
+
+  const field = (name) => {
+    const match = html.match(new RegExp(`<(?:(?:input)|(?:select)|(?:textarea))\\b[^>]*\\bname="${name}"[^>]*>`, 'i'));
+    assert.ok(match, `contact form should include ${name}`);
+    return match[0];
+  };
+  const requiredFields = ['name', 'email', 'area_of_interest', 'message'];
+  const optionalFields = ['company', 'project_stage', 'timeframe', 'additional_context'];
+
+  for (const name of requiredFields) {
+    assert.match(field(name), /\brequired(?:\s|=|>)/i, `${name} should be required`);
+  }
+  for (const name of optionalFields) {
+    assert.doesNotMatch(field(name), /\brequired(?:\s|=|>)/i, `${name} should be optional`);
+  }
+
+  for (const label of [
+    'Cloud and platform engineering',
+    'Integration and APIs',
+    'Enterprise automation',
+    'Security',
+    'AI consulting',
+    'Data engineering',
+    'A combination of these',
+    'Not sure yet / general enquiry',
+  ]) {
+    assert.ok(html.includes(label), `contact form should offer ${label}`);
+  }
+  assert.match(html, /maxlength="5000"/);
+  assert.match(html, /maxlength="2000"/);
+  assert.match(html, /role="status"[^>]+aria-live="polite"/);
+  assert.match(html, /Do not submit[^<]*(?:passwords|credentials)/i);
+});
+
+test('contact page includes Web3Forms hCaptcha and checks for a response token', () => {
+  const html = readFileSync(join(outputDirectory, 'contact/index.html'), 'utf8');
+  assert.match(html, /class="h-captcha"[^>]*data-captcha="true"/);
+  assert.match(html, /<script[^>]+src="https:\/\/web3forms\.com\/client\/script\.js"/);
+  assert.match(html, /h-captcha-response/);
+  assert.match(html, /Complete the spam protection check/);
+});
+
+test('contact confirmation is noindex and excluded from Pagefind and the sitemap', () => {
+  const html = readFileSync(join(outputDirectory, 'contact/thanks/index.html'), 'utf8');
+  assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+  assert.match(html, /data-pagefind-ignore/);
+  assert.match(html, /href="\/contact\/"/);
+
+  const sitemapIndex = readFileSync(join(outputDirectory, 'sitemap-index.xml'), 'utf8');
+  const sitemapUrls = [...sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const sitemap = sitemapUrls
+    .map((url) => readFileSync(join(outputDirectory, new URL(url).pathname.slice(1)), 'utf8'))
+    .join('\n');
+  assert.ok(!sitemap.includes('https://www.wecollab8.co.za/contact/thanks/'));
+});
+
+test('privacy notice explains the Web3Forms data flow and current retention terms', () => {
+  const html = readFileSync(join(outputDirectory, 'privacy/index.html'), 'utf8');
+  assert.match(html, /Web3Forms/);
+  assert.match(html, /name, work email, organisation, area of interest, project stage, timeframe, and message content/i);
+  assert.match(html, /IP addresses and email addresses/);
+  assert.match(html, /up to three years/);
+  assert.match(html, /https:\/\/web3forms\.com\/privacy/);
+  assert.match(html, /https:\/\/web3forms\.com\/dpa/);
+  assert.match(html, /contact page loads.*hCaptcha widget/i);
+  assert.match(html, /https:\/\/www\.hcaptcha\.com\/privacy/);
+  assert.doesNotMatch(html, /does not load a Web3Forms script/);
+});
+
+test('deployment uses a dummy Web3Forms key for pull requests and requires production configuration', () => {
+  const workflow = readFileSync(join(process.cwd(), '.github/workflows/deploy.yml'), 'utf8');
+  assert.match(workflow, /if: github\.event_name != 'pull_request'/);
+  assert.match(workflow, /PUBLIC_WEB3FORMS_ACCESS_KEY/);
+  assert.match(workflow, /test-access-key/);
 });
 
 test('new service pages contain their approved service details and contact links', () => {
@@ -66,7 +172,7 @@ test('new service pages contain their approved service details and contact links
     assert.ok(html.includes(service.title), `${service.path} should include its title`);
     assert.ok(html.includes(service.summary), `${service.path} should include its summary`);
     assert.ok(html.includes(service.capability), `${service.path} should include its capabilities`);
-    assert.match(html, /mailto:admin@wecollab8\.co\.za/);
+    assert.match(html, /mailto:hello@wecollab8\.co\.za/);
     assert.match(html, /rel="canonical"/);
   }
 });
@@ -88,10 +194,10 @@ test('search page exposes an accessible search form and Pagefind assets are buil
   assert.match(html, /data-pagefind-ignore/);
   assert.ok(readFileSync(join(outputDirectory, 'pagefind/pagefind.js'), 'utf8').length > 0);
   const index = JSON.parse(readFileSync(join(outputDirectory, 'pagefind/pagefind-entry.json'), 'utf8'));
-  assert.ok(index.languages.en.page_count >= 10, 'Pagefind should index marketing pages as well as docs');
+  assert.ok(index.languages.en.page_count >= 10, 'Pagefind should index the public marketing pages');
 });
 
-test('sitemap contains canonical service and docs URLs but excludes search, preferences and 404', () => {
+test('sitemap contains canonical service URLs but excludes docs, search, preferences and 404', () => {
   const sitemapIndex = readFileSync(join(outputDirectory, 'sitemap-index.xml'), 'utf8');
   const sitemapUrls = [...sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   assert.ok(sitemapUrls.length > 0, 'sitemap index should reference at least one sitemap');
@@ -106,9 +212,6 @@ test('sitemap contains canonical service and docs URLs but excludes search, pref
   for (const route of [
     '/services/ai-consulting/',
     '/services/data-engineering/',
-    '/docs/',
-    '/docs/ai-readiness/',
-    '/docs/data-foundations/',
     '/blog/',
     '/blog/great-expectations-data-quality/',
     '/news/',
@@ -116,6 +219,7 @@ test('sitemap contains canonical service and docs URLs but excludes search, pref
     assert.ok(sitemap.includes(`https://www.wecollab8.co.za${route}`), `sitemap should include ${route}`);
   }
   assert.ok(!sitemap.includes('https://www.wecollab8.co.za/search/'));
+  assert.ok(!sitemap.includes('https://www.wecollab8.co.za/docs/'));
   assert.ok(!sitemap.includes('https://www.wecollab8.co.za/cookie-preferences/'));
   assert.ok(!sitemap.includes('https://www.wecollab8.co.za/404/'));
 });

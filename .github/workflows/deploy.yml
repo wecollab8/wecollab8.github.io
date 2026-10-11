@@ -30,7 +30,18 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Require Web3Forms access key for production builds
+        if: github.event_name != 'pull_request'
+        env:
+          PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.PUBLIC_WEB3FORMS_ACCESS_KEY }}
+        run: |
+          if [ -z "$PUBLIC_WEB3FORMS_ACCESS_KEY" ]; then
+            echo "::error::Configure the PUBLIC_WEB3FORMS_ACCESS_KEY repository variable before deploying."
+            exit 1
+          fi
       - name: Build static site
+        env:
+          PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ github.event_name == 'pull_request' && 'test-access-key' || vars.PUBLIC_WEB3FORMS_ACCESS_KEY }}
         run: npm run build
       - name: Run smoke tests
         run: npm test

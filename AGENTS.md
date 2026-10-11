@@ -21,7 +21,7 @@
 ## Conventions
 
 - Keep routes static and preserve existing public paths where practical.
-- Contact uses `mailto:admin@wecollab8.co.za`; form handling will be added separately later.
+- Contact uses `mailto:hello@wecollab8.co.za`; form handling is provided by Web3Forms.
 - Put new public assets in `public/` and reference them from the site root.
 - Add a route assertion to `tests/static-output.test.mjs` when introducing a page that must exist in production.
 - GitHub Pages publishes the root custom domain `www.wecollab8.co.za` from `public/CNAME`.
