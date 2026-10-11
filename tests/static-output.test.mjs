@@ -20,6 +20,7 @@ const requiredPages = [
   'blog/index.html',
   'blog/great-expectations-data-quality/index.html',
   'news/index.html',
+  'news/jev-a-different-model-for-ai-automation/index.html',
   'cookie-preferences/index.html',
   'privacy/index.html',
   'about/index.html',
@@ -240,13 +241,43 @@ test('blog archive links to a Great Expectations article rendered from Markdown'
   assert.match(article, /rel="canonical"/);
 });
 
-test('news archive is published with an honest empty state and both sections are in navigation', () => {
+test('news archive publishes the Jev article and both sections are in navigation', () => {
   const news = readFileSync(join(outputDirectory, 'news/index.html'), 'utf8');
   const homepage = readFileSync(join(outputDirectory, 'index.html'), 'utf8');
 
-  assert.match(news, /No news has been published yet/);
+  assert.match(news, /href="\/news\/jev-a-different-model-for-ai-automation\/"/);
+  assert.match(news, /Jev: a different model for AI automation/);
+  assert.doesNotMatch(news, /No news has been published yet/);
   assert.match(homepage, /href="\/blog\/"/);
   assert.match(homepage, /href="\/news\/"/);
+});
+
+test('Jev news article publishes its sources, metadata, and evidence caveats', () => {
+  const html = readFileSync(join(outputDirectory, 'news/jev-a-different-model-for-ai-automation/index.html'), 'utf8');
+
+  assert.match(html, /Jev: a different model for AI automation/);
+  assert.match(html, /11 October 2026/);
+  assert.match(html, /WeCollab8/);
+  assert.match(html, /AI \/ Automation/);
+  for (const source of [
+    'https://typesafe.ai/blog/introducing-system-one-models-and-jev',
+    'https://docs.typesafe.ai/concepts/system-one',
+    'https://evals.typesafe.ai/',
+    'https://openai.com/index/introducing-structured-outputs-in-the-api/',
+  ]) {
+    assert.ok(html.includes(source), `Jev article should cite ${source}`);
+  }
+
+  assert.match(html, /structured outputs? alone[^.]*not unique to Jev/i);
+  assert.match(html, /decision-first/i);
+  assert.match(html, /TypeSafe[^.]*RLCD/i);
+  assert.match(html, /TypeSafe[^.]*speed[^.]*cost[^.]*performance/i);
+  assert.match(html, /four (?:example )?workflows/i);
+  assert.match(html, /authored by TypeSafe/i);
+  assert.match(html, /adapter[^.]*slower and more expensive/i);
+  assert.match(html, /not ground truth/i);
+  assert.match(html, /not(?: be treated as)? general guarantees/i);
+  assert.match(html, /typed output[^.]*confidence[^.]*not[^.]*correct/i);
 });
 
 test('site footer offers a persistent cookie-preference entry point', () => {
